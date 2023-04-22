@@ -1,0 +1,21 @@
+{
+    "name": "com.vexxedlib.tmp",
+    "version": "1.0.0",
+    "displayName": "VexxedLib TMP",
+    "description": "This is a package filled with functions I find useful in my daily programming.",
+    "unity": "2021.3",
+    "keywords": [
+        "Vexxedlib",
+        "Library",
+        "DaVexx",
+        "DabVexx"
+      ],
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/Dabvexx/Vexxedlib-TMP"
+      },
+    "author": {
+        "name": "Alex Woods",
+        "email": "AlexanderJWoods23@gmail.com"
+      }
+}
