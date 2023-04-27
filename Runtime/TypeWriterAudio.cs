@@ -1,11 +1,13 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
 namespace VexxedLib.TMP
 {
     [RequireComponent(typeof(TextMeshProUGUI))]
-    public class TypeWriter : MonoBehaviour
+    [RequireComponent(typeof(AudioSource))]
+    public class TypeWriterAudio : MonoBehaviour
     {
         #region Variables
         // Variables.
@@ -13,7 +15,7 @@ namespace VexxedLib.TMP
         private string text;
 
         [SerializeField] bool runOnEnable;
-        [SerializeField] float waitTime;
+        [SerializeField] AudioClip[] clips;
         #endregion
 
         #region Unity Methods
@@ -37,13 +39,15 @@ namespace VexxedLib.TMP
 
         #region Private Methods
         // Private Methods.
-        private IEnumerator TypeWrite(string text, float waitTime)
+        private IEnumerator TypeWrite(string text, AudioClip[] clips)
         {
             foreach (char c in text)
             {
-                // Use tmp textinfo wordinfo to modify vertex on letters
+                var clip = clips[Random.Range(0, clips.Length - 1)];
+
                 GUIText.text = GUIText.text + c;
-                yield return new WaitForSeconds(waitTime);
+
+                yield return new WaitForSeconds(clip.length);
             }
         }
         #endregion
@@ -54,22 +58,33 @@ namespace VexxedLib.TMP
         // TODO? ^
         public void StartTypeWrite()
         {
-            var coroutine = TypeWrite(text, waitTime);
+            var coroutine = TypeWrite(text, clips);
             StartCoroutine(coroutine);
         }
-        public void StartTypeWrite(string text, float waitTime)
+        public void StartTypeWrite(string text, AudioClip clip)
         {
-            var coroutine = TypeWrite(text, waitTime);
+            var coroutine = TypeWrite(text, new AudioClip[] { clip });
             StartCoroutine(coroutine);
         }
         public void StartTypeWrite(string text)
         {
-            var coroutine = TypeWrite(text, waitTime);
+            var coroutine = TypeWrite(text, clips);
             StartCoroutine(coroutine);
         }
-        public void StartTypeWrite(float waitTime)
+        public void StartTypeWrite(AudioClip clip)
         {
-            var coroutine = TypeWrite(text, waitTime);
+            var coroutine = TypeWrite(text, new AudioClip[] { clip });
+            StartCoroutine(coroutine);
+        }
+        public void StartTypeWrite(string text, AudioClip[] clips)
+        {
+            var coroutine = TypeWrite(text, clips);
+            StartCoroutine(coroutine);
+        }
+
+        public void StartTypeWrite(AudioClip[] clips)
+        {
+            var coroutine = TypeWrite(text, clips);
             StartCoroutine(coroutine);
         }
 
